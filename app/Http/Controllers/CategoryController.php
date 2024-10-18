@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cartegory;
-use App\Http\Requests\StoreCartegoryRequest;
-use App\Http\Requests\UpdateCartegoryRequest;
+use App\Models\Category;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
-class CartegoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return $categories;
     }
 
     /**
@@ -27,7 +28,7 @@ class CartegoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCartegoryRequest $request)
+    public function store(StoreCategoryRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class CartegoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Cartegory $cartegory)
+    public function show(Category $category)
     {
         //
     }
@@ -43,7 +44,7 @@ class CartegoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cartegory $cartegory)
+    public function edit(Category $category)
     {
         //
     }
@@ -51,7 +52,7 @@ class CartegoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCartegoryRequest $request, Cartegory $cartegory)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
     }
@@ -59,7 +60,7 @@ class CartegoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cartegory $cartegory)
+    public function destroy(Category $category)
     {
         //
     }

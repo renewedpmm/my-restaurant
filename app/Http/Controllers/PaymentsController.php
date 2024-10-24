@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payments;
+use App\Models\User;
+use App\Notifications\SendPaymentEmail;
 use App\Http\Requests\StorePaymentsRequest;
 use App\Http\Requests\UpdatePaymentsRequest;
 
@@ -13,8 +15,10 @@ class PaymentsController extends Controller
      */
     public function index()
     {
-        //
+        $payments =payments::all ();
+        return $payments;
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +33,20 @@ class PaymentsController extends Controller
      */
     public function store(StorePaymentsRequest $request)
     {
-        //
+        
+        $payments = new payments;
+
+        $payments->user_id = $request->user_id;
+        $payments->order_id = $request->order_id;
+        $payments->amount = $request->amount;
+        $payments->payment_type = $request->payment_type;
+        $payments->payment_status = $request->payment_status;
+
+        $payments->save();
+        $user = User::find($request->user_id);
+        $user->notify(new SendPaymentEmail($user, $payments));
+
+        return $payments;
     }
 
     /**

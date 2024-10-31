@@ -43,6 +43,11 @@ class PaymentsController extends Controller
         $payments->payment_status = $request->payment_status;
 
         $payments->save();
+           //update order status
+           $order = Orders::where('id', $request->order_id)->first();
+           $order->order_status = 'Preparing';
+           $order->save();
+   
         $user = User::find($request->user_id);
         $user->notify(new SendPaymentEmail($user, $payments));
 
